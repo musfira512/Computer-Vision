@@ -1,35 +1,94 @@
-**Image Manipulation with OpenCV**
+🖼️ CIFAR-10 Image Classification with CNN
 
-This notebook explores fundamental image manipulation techniques using the OpenCV library in Python. Below are detailed explanations of the concepts covered:
+This project demonstrates how to build and train a Convolutional Neural Network (CNN) using TensorFlow/Keras to classify images from the CIFAR-10 dataset.
+The CIFAR-10 dataset consists of 60,000 images (32x32, RGB) across 10 categories:
 
-**Reading and Displaying Images**
+🚀 Airplane | 🚗 Automobile | 🐦 Bird | 🐱 Cat | 🦌 Deer | 🐶 Dog | 🐸 Frog | 🐴 Horse | 🚢 Ship | 🚚 Truck
 
-OpenCV provides functions to read image files into a format that can be processed programmatically. Once loaded, images can be displayed to visualize the results of different operations. Images are typically represented as multi-dimensional arrays, where each element corresponds to a pixel's intensity or color value.
+📂 Project Workflow
 
-**Color Channels**
+1️⃣ Data Loading
 
-Color images are often represented using color channels, such as Red, Green, and Blue (RGB). Each channel represents the intensity of that specific color at each pixel. By manipulating individual channels, you can alter the color composition of the image. For example, setting the values of a specific channel to zero will remove that color component from the image.
+Load CIFAR-10 from tensorflow.keras.datasets.
 
-**Grayscale Conversion**
+Train/Test split → 50,000 / 10,000 samples.
 
-Converting a color image to grayscale removes the color information, leaving only intensity variations. This is often a preprocessing step for various computer vision tasks, as it reduces the complexity of the data while retaining essential structural information. The conversion typically involves a weighted average of the color channels.
+2️⃣ Preprocessing
 
-**Flipping Images**
+Normalize pixel values → [0, 1].
 
-Flipping an image creates a mirror image of the original along a specified axis. You can flip horizontally, vertically, or both. This operation is useful for data augmentation in machine learning or for presenting images in a mirrored view.
+Keep labels as integers (0–9).
 
-**Cropping Images**
+3️⃣ Model Architecture 🧠
 
-Cropping an image involves selecting a rectangular region of interest from the original image. This is done by specifying the coordinates of the top-left and bottom-right corners of the desired region. Cropping is useful for focusing on specific parts of an image or removing unwanted areas.
+Conv2D + ReLU + MaxPooling layers
 
-**Blurring Images**
+Dense (fully connected) layers with ReLU
 
-Blurring, or smoothing, an image reduces noise and detail by averaging the pixel values in a local neighborhood. Gaussian blur is a common technique that uses a Gaussian function to weigh the neighboring pixels, giving more importance to pixels closer to the center. The degree of blur is controlled by the kernel size and standard deviation.
+Dropout for regularization
 
-**Resizing and Rescaling Images**
+Softmax output layer for classification
 
-Resizing an image changes its dimensions (width and height). You can either specify the new dimensions directly or provide a scaling factor to enlarge or shrink the image while maintaining its aspect ratio. Resizing is essential for standardizing image sizes for processing or for adapting images for different display purposes.
+4️⃣ Training
 
-**Drawing Shapes and Text on Images**
+Optimizer: Adam
 
-OpenCV allows you to draw various shapes, such as circles, rectangles, and lines, and also add text directly onto an image. This is useful for annotating images, highlighting features, or creating visual overlays. You can specify the position, size, color, and thickness of the shapes and text.
+Loss: Sparse Categorical Crossentropy
+
+Epochs: 10
+
+Batch size: 64
+
+5️⃣ Evaluation & Visualization
+
+Accuracy & loss plots over epochs
+
+Model evaluation on test set
+
+Predictions visualized (True vs Predicted labels)
+
+🎯 CIFAR-10 Classes
+Label	Class	Emoji
+0	Airplane	✈️
+1	Automobile	🚗
+2	Bird	🐦
+3	Cat	🐱
+4	Deer	🦌
+5	Dog	🐶
+6	Frog	🐸
+7	Horse	🐴
+8	Ship	🚢
+9	Truck	🚚
+📊 Results
+
+✔️ Training Accuracy improves steadily across epochs
+✔️ Validation Accuracy ~70–80% (with default CNN)
+✔️ Handles most categories well, some confusion in Cat vs Dog
+
+📈 Example Accuracy/Loss Curves:
+
+(insert your plot images here)
+
+🔍 Example Predictions
+True: Dog 🐶   → Pred: Dog ✅  
+True: Cat 🐱   → Pred: Dog ❌  
+True: Airplane ✈️ → Pred: Airplane ✅  
+
+🛠️ How to Run
+
+Clone the repo and run the notebook:
+
+git clone https://github.com/musfira512/cifar10-cnn.git
+cd cifar10-cnn
+jupyter notebook
+
+
+Or run the script:
+
+python cifar10_cnn.py
+
+🤝 Acknowledgements
+
+Dataset: CIFAR-10
+
+Framework: TensorFlow / Keras
